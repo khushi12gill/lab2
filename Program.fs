@@ -43,37 +43,48 @@ printfn "Percentages of each teams: %A" successPercentages
 
 
 
-type Cuisine = 
- | Korean
- | Turkish
+type Cuisine =
+    | Korean
+    | Turkish
 
 type MovieType =
- | Regular
- | IMAX
- | DBOX
- | RegularWithSnacks
- | IMAXWithSnacks
- | DBOXWithSnacks
+    | Regular
+    | IMAX
+    | DBOX
+    | RegularWithSnacks
+    | IMAXWithSnacks
+    | DBOXWithSnacks
 
 type Activity =
- | BoardGame
- | Chill
- | Movie of MovieType
- | Restaurant of Cuisine
- | LongDrive of int * float
+    | BoardGame
+    | Chill
+    | Movie of MovieType * Cuisine  
+    | Restaurant of Cuisine
+    | LongDrive of int * float
 
-let calculateBud activity =
-   match activity with 
-   | BoardGame | Chill -> 0.0
-   | Movie Regular -> 12.0
-   | Movie IMAX -> 17.0
-   | Movie DBOX -> 20.0
-   | Movie RegularWithSnacks | Movie IMAXWithSnacks | Movie DBOXWithSnacks -> 12.0 + 5.0 
-   | Restaurant Korean -> 70.0
-   | Restaurant Turkish -> 65.0
-   | LongDrive (kilometres, fuelcharge) -> float kilometres * fuelcharge
+let calculateBudget (activity : Activity) : float =
+    match activity with
+    | BoardGame | Chill -> 0.0
+    | Movie (movieType, cuisine) ->  
+        match movieType with
+        | Regular -> 12.0
+        | IMAX -> 17.0
+        | DBOX -> 20.0
+        | RegularWithSnacks | IMAXWithSnacks | DBOXWithSnacks -> 5.0 
+    | Restaurant cuisine ->
+        match cuisine with
+        | Korean -> 70.0
+        | Turkish -> 65.0
+    | LongDrive (distance, fuel) -> float distance * fuel
 
+let MBudget = calculateBudget (Movie (Regular, Korean))
+printfn "Movie Budget: %.2f CAD" MBudget
 
+let RBudget = calculateBudget (Restaurant Turkish)
+printfn "Restaurant Budget: %.2f CAD" RBudget
+
+let DriveBudget = calculateBudget (LongDrive (100, 0.5))
+printfn "Long Drive Budget: %.2f CAD"DriveBudget
 
 
 
