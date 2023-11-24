@@ -23,7 +23,7 @@ let teams : Team list = [
 ]
 
 let sTeams =
-    teamss
+    teams
     |> List.filter (fun team -> team.Stats.Wins > team.Stats.Losses)
     |> List.map (fun team -> team.Name)
 
@@ -38,4 +38,36 @@ let successPercentages =
     |> List.map (fun team -> (team.Name, calculateSuccessPercentage team))
 
 printfn "Percentages of each teams: %A" successPercentages
+
+
+
+
+
+type Cuisine = 
+ | Korean
+ | Turkish
+
+type MovieType =
+ | Regular
+ | IMAX
+ | DBOX
+ | RegularWithSnacks
+ | IMAXWithSnacks
+ | DBOXWithSnacks
+
+type Activity =
+ | BoardGame
+ | Chill
+ | Movie of MovieType
+ | Restaurant of Cuisine
+ | LongDrive of int * float
+
+
+
+
+
+
+
+
+
 
