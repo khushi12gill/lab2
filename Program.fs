@@ -62,6 +62,18 @@ type Activity =
  | Restaurant of Cuisine
  | LongDrive of int * float
 
+let calculateBudget activity =
+   match activity with 
+   | BoardGame | Chill -> 0.0
+   | Movie Regular -> 12.0
+   | Movie IMAX -> 17.0
+   | Movie DBOX -> 20.0
+   | Movie RegularWithSnacks | Movie IMAXWithSnacks | Movie DBOXWithSnacks -> 12.0 + 5.0 
+   | Restaurant Korean -> 70.0
+   | Restaurant Turkish -> 65.0
+  
+
+
 
 
 
