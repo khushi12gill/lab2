@@ -62,7 +62,7 @@ type Activity =
  | Restaurant of Cuisine
  | LongDrive of int * float
 
-let calculateBudget activity =
+let calculateBud activity =
    match activity with 
    | BoardGame | Chill -> 0.0
    | Movie Regular -> 12.0
@@ -71,7 +71,8 @@ let calculateBudget activity =
    | Movie RegularWithSnacks | Movie IMAXWithSnacks | Movie DBOXWithSnacks -> 12.0 + 5.0 
    | Restaurant Korean -> 70.0
    | Restaurant Turkish -> 65.0
-  
+   | LongDrive (kilometres, fuelcharge) -> float kilometres * fuelcharge
+
 
 
 
